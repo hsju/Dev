@@ -23,7 +23,7 @@ public class FruitsController {
 
 	@Resource(name = "fruitsService")
 	private FruitsService fruitsService;
-
+   
 	/**
 	 * List Page
 	 * 
@@ -66,7 +66,8 @@ public class FruitsController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/insertBoard.hs")
-	public ModelAndView insertBoard(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView insertBoard(CommandMap commandMap,
+			HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/openBoardList.hs");
 
 		fruitsService.insertBoard(commandMap.getMap(), request);
@@ -89,7 +90,7 @@ public class FruitsController {
 				.getMap());
 		mv.addObject("map", map.get("map")); // detail info
 		mv.addObject("list", map.get("list")); // file info
-		
+
 		return mv;
 	}
 
@@ -104,15 +105,17 @@ public class FruitsController {
 	public ModelAndView openBoardUpdate(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/fruits/boardUpdate");
 
-	    Map<String,Object> map = fruitsService.selectBoardDetail(commandMap.getMap());
-	    mv.addObject("map", map.get("map"));
-	    mv.addObject("list", map.get("list"));
+		Map<String, Object> map = fruitsService.selectBoardDetail(commandMap
+				.getMap());
+		mv.addObject("map", map.get("map"));
+		mv.addObject("list", map.get("list"));
 
 		return mv;
 	}
 
 	@RequestMapping(value = "/updateBoard.hs")
-	public ModelAndView updateBoard(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView updateBoard(CommandMap commandMap,
+			HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/openBoardDetail.hs");
 
 		fruitsService.updateBoard(commandMap.getMap(), request);
@@ -121,16 +124,15 @@ public class FruitsController {
 		return mv;
 	}
 
-	@RequestMapping(value="/deleteBoard.hs")
-	public ModelAndView deleteBoard(CommandMap commandMap) throws Exception{
-	    ModelAndView mv = new ModelAndView("redirect:/openBoardList.hs");
-	     
-	    fruitsService.deleteBoard(commandMap.getMap());
-	     
-	    return mv;
+	@RequestMapping(value = "/deleteBoard.hs")
+	public ModelAndView deleteBoard(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("redirect:/openBoardList.hs");
+
+		fruitsService.deleteBoard(commandMap.getMap());
+
+		return mv;
 	}
 
-	
 	/**
 	 * request.getParameter -> map test url :
 	 * http://localhost:8080/commandMap.hs?test=1111&test2=2222
